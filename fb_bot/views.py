@@ -1,3 +1,7 @@
+import os
+
+print os.environ
+
 import json, requests, random, re, os
 from pprint import pprint
 
