@@ -33,5 +33,5 @@ class BotView(View):
                 # This might be delivery, optin, postback for other events 
                 if 'message' in message:
                     # Print the message to the terminal
-                    pprint(message)     
+                    print message     
         return HttpResponse()
