@@ -1,6 +1,6 @@
 import json, requests, random, re, os
 from pprint import pprint
-
+import keys
 from django.views import generic
 from django.http.response import HttpResponse
 
