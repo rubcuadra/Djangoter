@@ -1,7 +1,3 @@
-import os
-
-print os.environ
-
 import json, requests, random, re, os
 from pprint import pprint
 
@@ -11,7 +7,6 @@ from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-print os.environ
 #  ------------------------ Fill this with your page access token! -------------------------------
 PAGE_ACCESS_TOKEN = os.getenv('token')
 VERIFY_TOKEN = "v4l1d4710n70k3n"
