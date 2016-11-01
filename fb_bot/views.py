@@ -8,7 +8,9 @@ from django.http.response import HttpResponse
 import json
 # Create your views here.
 class BotView(View):
-    '''def get(self, request, *args, **kwargs):
+    '''
+    #Validar el endpoint
+    def get(self, request, *args, **kwargs):
 	if self.request.GET['hub.verify_token'] == 'v4l1d4710n70k3n':
             return HttpResponse(self.request.GET['hub.challenge'])
         else:
