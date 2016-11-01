@@ -14,14 +14,12 @@ token = os.getenv('token')
 import requests
 # Create your views here.
 class BotView(View):
-    '''
-    #Validar el endpoint
     def get(self, request, *args, **kwargs):
 	if self.request.GET['hub.verify_token'] == 'v4l1d4710n70k3n':
             return HttpResponse(self.request.GET['hub.challenge'])
         else:
             return HttpResponse('Error, invalid token')
-    '''
+            
     # The get method is the same as before.. omitted here for brevity
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
