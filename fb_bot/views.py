@@ -7,8 +7,10 @@ from django.views.generic import View
 from django.http.response import HttpResponse
 import requests
 import json
-from os import getenv
-token = getenv('token')
+import os
+
+print os.environ
+token = os.getenv('token')
 # Create your views here.
 class BotView(View):
     '''
