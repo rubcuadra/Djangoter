@@ -23,11 +23,9 @@ def post_facebook_message(fbid, recevied_message):
     
     # Remove all punctuations, lower case the text and split it based on space
     tokens = re.sub(r"[^a-zA-Z0-9\s]",' ',recevied_message).lower().split()
-    
-    print tokens
 
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
-    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":joke_text}})
+    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":tokens}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=tokens)
     pprint(status.json())
 
