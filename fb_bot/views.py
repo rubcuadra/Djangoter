@@ -7,12 +7,10 @@ from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-print os.environ
-
 #  ------------------------ Fill this with your page access token! -------------------------------
 PAGE_ACCESS_TOKEN = os.getenv('token')
 VERIFY_TOKEN = "v4l1d4710n70k3n"
-
+print 'PAGE_ACCESS_TOKEN ',PAGE_ACCESS_TOKEN
 jokes = { 'stupid': ["""Yo' Mama is so stupid, she needs a recipe to make ice cubes.""", 
                      """Yo' Mama is so stupid, she thinks DNA is the National Dyslexics Association."""], 
          'fat':      ["""Yo' Mama is so fat, when she goes to a restaurant, instead of a menu, she gets an estimate.""", 
