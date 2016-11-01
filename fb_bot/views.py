@@ -5,12 +5,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 from django.http.response import HttpResponse
-import requests
 import json
 import os
 
 print os.environ
 token = os.getenv('token')
+
+import requests
 # Create your views here.
 class BotView(View):
     '''
