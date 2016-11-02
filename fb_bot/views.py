@@ -60,7 +60,7 @@ class BotView(generic.View):
                     elif message['message']['text']=='moonman':
                         video = "/home/ubuntu/botster/media/moonman.mp4"
                         video = 'https://s3-us-west-2.amazonaws.com/cuadra-apps/moonman.mp4'
-                        bot.send_video_url(message['sender']['id'] ,video, notification_type='REGULAR')
+                        bot.send_video_url(message['sender']['id'] ,video)
                     
                     bot.send_text_message(message['sender']['id'], \
                                           message['message']['text'])
