@@ -46,6 +46,9 @@ class BotView(generic.View):
                 # Check to make sure the received call is a message call
                 # This might be delivery, optin, postback for other events 
                 #if 'read' in message: #Lo acaba de leer
+                if 'postback' in message:
+                    print message['postback']['payload']
+
                 if 'message' in message:
                     # Print the message to the terminal
                     if 'is_echo' in message['message']: continue
