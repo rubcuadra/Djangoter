@@ -63,9 +63,9 @@ class BotView(generic.View):
                     elif message['message']['text'] == 'button':
                         buttons = []
                         button = Button(type="web_url",url='https://petersapparel.parseapp.com',title='Show Website')
-                        button.append(button)
+                        buttons.append(button)
                         button1 = Button(type="postback",title='Start chat',payload='My payload')
-                        button.append(button1)
+                        buttons.append(button1)
                         bot.send_button_message(message['sender']['id'],"Bienvenido",button)
                     else:
                         bot.send_text_message(message['sender']['id'],message['message']['text'])
