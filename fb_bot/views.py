@@ -61,9 +61,8 @@ class BotView(generic.View):
                     elif message['message']['text']=='moonman':
                         video = 'https://s3-us-west-2.amazonaws.com/cuadra-apps/moonman.mp4'
                         bot.send_video_url(message['sender']['id'] ,video)
-                    
-                    bot.send_text_message(message['sender']['id'], \
-                                          message['message']['text'])
+                    else:
+                        bot.send_text_message(message['sender']['id'],message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
                     # are sent as attachments and must be handled accordingly.     
                 if 'read' in message:
