@@ -3,8 +3,7 @@ from pprint import pprint
 import keys
 from django.views import generic
 from django.http.response import HttpResponse
-from pymessenger.bot import Bot
-from pymessenger import Element, Button
+from messengerWrapper.bot import Bot, Element, Button
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
