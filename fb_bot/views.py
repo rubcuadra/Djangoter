@@ -3,7 +3,7 @@ from pprint import pprint
 import keys
 from django.views import generic
 from django.http.response import HttpResponse
-from messengerWrapper.bot import Bot, Element, Button
+from messengerWrapper.bot import Bot, Element, Button,QuickReply,QuickLocationReply
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
@@ -71,6 +71,14 @@ class BotView(generic.View):
                         button1 = Button(type="postback",title='Start chat',payload='My payload')
                         buttons.append(button1)
                         bot.send_button_message(message['sender']['id'],"Bienvenido",buttons)
+                    elif message['message']['text'] == 'quick':
+                        quicks = []
+                        button = QuickLocationReply()
+                        quicks.append(button)
+                        button1 = QuickReply(content_type="text",title='red',image_url='http://petersfantastichats.com/img/red.png',payload='My payload')
+                        quicks.append(button1)
+                        bot.send_quick_replies(message['sender']['id'],"Selecciona",quicks)
+
                     else:
                         bot.send_text_message(message['sender']['id'],message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
