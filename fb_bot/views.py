@@ -53,7 +53,7 @@ class BotView(generic.View):
                         element = Element(title="test", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://arsenal.com")
                         element = Element(title="test1", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://apple.com")
                         elements.append(element)
-                        bot.send_generic_message(recipient_id, elements)
+                        bot.send_generic_message(message['sender']['id'], elements)
                     
                     bot.send_text_message(message['sender']['id'], \
                                           message['message']['text'])
