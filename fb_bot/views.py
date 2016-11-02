@@ -4,6 +4,7 @@ import keys
 from django.views import generic
 from django.http.response import HttpResponse
 from pymessenger.bot import Bot
+from pymessenger import Element, Button
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
@@ -36,20 +37,24 @@ class BotView(generic.View):
 
     # Post function to handle Facebook messages
     def post(self, request, *args, **kwargs):
-        print args
-        print kwargs
         # Converts the text payload into a python dictionary
         incoming_message = json.loads(self.request.body.decode('utf-8'))
         # Facebook recommends going through every entry since they might send
         # multiple messages in a single call during high load
         for entry in incoming_message['entry']:
-            print 'BUSQUEDA ',entry['messaging']
             for message in entry['messaging']:
                 # Check to make sure the received call is a message call
                 # This might be delivery, optin, postback for other events 
                 #if 'read' in message: #Lo acaba de leer
                 if 'message' in message:
                     # Print the message to the terminal
+                    if message['message']['text']=='img':
+                        elements = []
+                        element = Element(title="test", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://arsenal.com")
+                        element = Element(title="test1", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://apple.com")
+                        elements.append(element)
+                        bot.send_generic_message(recipient_id, elements)
+                    
                     bot.send_text_message(message['sender']['id'], \
                                           message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
