@@ -49,6 +49,9 @@ class BotView(generic.View):
                 if 'postback' in message:
                     print message['postback']['payload']
                     continue
+                if 'quick_reply' in message:
+                    print message['quick_reply']['payload']
+                    continue
 
                 elif 'message' in message:
                     # Print the message to the terminal
