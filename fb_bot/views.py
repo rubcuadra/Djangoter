@@ -58,8 +58,8 @@ class BotView(generic.View):
                         elements.append(element1)
                         bot.send_generic_message(message['sender']['id'], elements)
                     
-                    elif message['message']['text']=='vaporwave':
-                        image_url = "https://www.youtube.com/watch?v=TgqiSBxvdws"
+                    elif message['message']['text']=='moonman':
+                        image_url = "https://s3-us-west-2.amazonaws.com/cuadra-apps/moonman.mp4"
                         bot.send_image_url(message['sender']['id'], image_url) 
 
                     bot.send_text_message(message['sender']['id'], \
