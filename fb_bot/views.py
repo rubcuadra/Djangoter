@@ -3,22 +3,20 @@ from pprint import pprint
 import keys
 from django.views import generic
 from django.http.response import HttpResponse
-
+from pymessenger.bot import Bot
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 #  ------------------------ Fill this with your page access token! -------------------------------
 PAGE_ACCESS_TOKEN = os.getenv('token')
 VERIFY_TOKEN = "v4l1d4710n70k3n"
-
+bot = Bot(PAGE_ACCESS_TOKEN)
 # Helper function
 def post_facebook_message(fbid, recevied_message):
-    
     # Remove all punctuations, lower case the text and split it based on space
     tokens = re.sub(r"[^a-zA-Z0-9\s]",' ',recevied_message).lower().split()
     response=''
     for token in tokens:response+=token+" " #Re armar lo mandado
-
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
     response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":recevied_message}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
@@ -52,8 +50,12 @@ class BotView(generic.View):
                 #if 'read' in message: #Lo acaba de leer
                 if 'message' in message:
                     # Print the message to the terminal
-                    pprint(message)    
+                    bot.send_text_message(message['sender']['id'], \
+                                          message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
-                    # are sent as attachments and must be handled accordingly. 
-                    post_facebook_message(message['sender']['id'], message['message']['text'])    
+                    # are sent as attachments and must be handled accordingly.     
+                else if 'delivery':
+                    pass
+                else if 'read' in message
+                    pass
         return HttpResponse()  
