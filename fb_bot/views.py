@@ -48,7 +48,9 @@ class BotView(generic.View):
                 #if 'read' in message: #Lo acaba de leer
                 if 'message' in message:
                     # Print the message to the terminal
-                    print message['message']
+                    if 'is_echo' in message['message']:
+                        continue
+
                     if message['message']['text']=='img':
                         elements = []
                         element = Element(title="test", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://arsenal.com")
