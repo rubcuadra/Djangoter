@@ -60,7 +60,7 @@ class BotView(generic.View):
                     
                     elif message['message']['text']=='moonman':
                         image_url = "https://s3-us-west-2.amazonaws.com/cuadra-apps/moonman.mp4"
-                        bot.send_video_url(message['sender']['id'], image_url) 
+                        print bot.send_video_url(message['sender']['id'], image_url) 
 
                     bot.send_text_message(message['sender']['id'], \
                                           message['message']['text'])
