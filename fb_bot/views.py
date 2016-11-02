@@ -42,14 +42,10 @@ class BotView(generic.View):
         # multiple messages in a single call during high load
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
+                print message
                 # Check to make sure the received call is a message call
                 # This might be delivery, optin, postback for other events 
                 #if 'read' in message: #Lo acaba de leer
-                if 'read' in message:
-                    continue
-                elif 'delivery':
-                    continue
-                
                 if 'message' in message:
                     # Print the message to the terminal
                     if 'is_echo' in message['message']: continue
@@ -70,6 +66,10 @@ class BotView(generic.View):
                                           message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
                     # are sent as attachments and must be handled accordingly.     
+                if 'read' in message:
+                    continue
+                elif 'delivery':
+                    continue
                 
 
         return HttpResponse()  
