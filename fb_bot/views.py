@@ -10,13 +10,6 @@ from django.utils.decorators import method_decorator
 #  ------------------------ Fill this with your page access token! -------------------------------
 PAGE_ACCESS_TOKEN = os.getenv('token')
 VERIFY_TOKEN = "v4l1d4710n70k3n"
-print 'PAGE_ACCESS_TOKEN ',PAGE_ACCESS_TOKEN
-jokes = { 'stupid': ["""Yo' Mama is so stupid, she needs a recipe to make ice cubes.""", 
-                     """Yo' Mama is so stupid, she thinks DNA is the National Dyslexics Association."""], 
-         'fat':      ["""Yo' Mama is so fat, when she goes to a restaurant, instead of a menu, she gets an estimate.""", 
-                      """ Yo' Mama is so fat, when the cops see her on a street corner, they yell, "Hey you guys, break it up!" """], 
-         'dumb': ["""Yo' Mama is so dumb, when God was giving out brains, she thought they were milkshakes and asked for extra thick.""", 
-                  """Yo' Mama is so dumb, she locked her keys inside her motorcycle."""] }
 
 # Helper function
 def post_facebook_message(fbid, recevied_message):
@@ -24,19 +17,17 @@ def post_facebook_message(fbid, recevied_message):
     # Remove all punctuations, lower case the text and split it based on space
     tokens = re.sub(r"[^a-zA-Z0-9\s]",' ',recevied_message).lower().split()
 
-    response = ''
-    for token in tokens:
-        response+=token+" "
+    for token in tokens:response+=token+" " #Re armar lo mandado
 
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
-    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":response}})
+    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":recevied_message}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     pprint(status.json())
 
 # Create your views here.
 class BotView(generic.View):
     def get(self, request, *args, **kwargs):
-        if self.request.GET['hub.verify_token'] == VERIFY_TOKEN:
+        if self.request.GET['hub.mode'] == 'subscribe' and self.request.GET['hub.verify_token'] == VERIFY_TOKEN:
             return HttpResponse(self.request.GET['hub.challenge'])
         else:
             return HttpResponse('Error, invalid token')
@@ -47,6 +38,7 @@ class BotView(generic.View):
 
     # Post function to handle Facebook messages
     def post(self, request, *args, **kwargs):
+        print request
         # Converts the text payload into a python dictionary
         incoming_message = json.loads(self.request.body.decode('utf-8'))
         # Facebook recommends going through every entry since they might send
