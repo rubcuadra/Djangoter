@@ -56,6 +56,6 @@ class BotView(generic.View):
                     # are sent as attachments and must be handled accordingly.     
                 else if 'delivery':
                     pass
-                else if 'read' in message
+                else if 'read' in message:
                     pass
         return HttpResponse()  
