@@ -45,10 +45,15 @@ class BotView(generic.View):
                 # Check to make sure the received call is a message call
                 # This might be delivery, optin, postback for other events 
                 #if 'read' in message: #Lo acaba de leer
+                if 'read' in message:
+                    continue
+                elif 'delivery':
+                    continue
+                
                 if 'message' in message:
                     # Print the message to the terminal
                     if 'is_echo' in message['message']: continue
-
+                    
                     if message['message']['text']=='img': #Enviar lista de imagenes
                         elements = []
                         element = Element(title="test", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://arsenal.com")
@@ -65,8 +70,6 @@ class BotView(generic.View):
                                           message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
                     # are sent as attachments and must be handled accordingly.     
-                elif 'delivery':
-                    pass
-                elif 'read' in message:
-                    pass
+                
+
         return HttpResponse()  
