@@ -45,10 +45,11 @@ class BotView(generic.View):
         # Facebook recommends going through every entry since they might send
         # multiple messages in a single call during high load
         for entry in incoming_message['entry']:
-            print entry
+            print 'BUSQUEDA ',entry['messaging']
             for message in entry['messaging']:
                 # Check to make sure the received call is a message call
                 # This might be delivery, optin, postback for other events 
+                #if 'read' in message: #Lo acaba de leer
                 if 'message' in message:
                     # Print the message to the terminal
                     pprint(message)    
