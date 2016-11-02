@@ -80,11 +80,11 @@ class Bot:
         Output:
             Response from API as <dict>
         """
-        print 'TIPO ',type(recipient_id)
+
         payload = {
             'recipient': {
                 {
-                    'id': recipient_id
+                    'id': recipient_id,
                 }
             },
             'notification_type': notification_type,
