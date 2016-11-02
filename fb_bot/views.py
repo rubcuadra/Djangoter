@@ -60,7 +60,7 @@ class BotView(generic.View):
                     elif message['message']['text']=='moonman':
                         video = "/home/ubuntu/botster/media/moonman.mp4"
                         print 'VIDEO ',message['sender']['id']
-                        bot.send_video(message['sender']['id'] ,video)
+                        bot.send_video(message['sender']['id'] ,video, notification_type='REGULAR')
                     
                     bot.send_text_message(message['sender']['id'], \
                                           message['message']['text'])
