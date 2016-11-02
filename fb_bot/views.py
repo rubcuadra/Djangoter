@@ -57,10 +57,9 @@ class BotView(generic.View):
                         element1 = Element(title="test1", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://apple.com")
                         elements.append(element1)
                         bot.send_generic_message(message['sender']['id'], elements)
-                    
                     elif message['message']['text']=='moonman':
                         video = 'https://s3-us-west-2.amazonaws.com/cuadra-apps/moonman.mp4'
-                        bot.send_video_url(message['sender']['id'] ,video)
+                        #bot.send_video_url(message['sender']['id'] ,video)
                     else:
                         bot.send_text_message(message['sender']['id'],message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
