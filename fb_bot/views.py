@@ -64,6 +64,7 @@ class BotView(generic.View):
                             if attachment['type']=='location':
                                 coor = attachment['payload']['coordinates']
                                 print coor['lat']
+                                print coor['long']
                         continue
 
                     elif message['message']['text']=='img': #Enviar lista de imagenes
@@ -90,7 +91,6 @@ class BotView(generic.View):
                         button1 = QuickReply(content_type="text",title='red',image_url='http://petersfantastichats.com/img/red.png',payload='My payload')
                         quicks.append(button1)
                         bot.send_quick_replies(message['sender']['id'],"Selecciona",quicks)
-
                     else:
                         bot.send_text_message(message['sender']['id'],message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
