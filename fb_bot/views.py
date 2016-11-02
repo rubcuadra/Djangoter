@@ -66,7 +66,7 @@ class BotView(generic.View):
                         buttons.append(button)
                         button1 = Button(type="postback",title='Start chat',payload='My payload')
                         buttons.append(button1)
-                        bot.send_button_message(message['sender']['id'],"Bienvenido",button)
+                        bot.send_button_message(message['sender']['id'],"Bienvenido",buttons)
                     else:
                         bot.send_text_message(message['sender']['id'],message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
