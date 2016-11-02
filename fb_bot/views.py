@@ -53,7 +53,7 @@ class BotView(generic.View):
                 if 'message' in message:
                     # Print the message to the terminal
                     if 'is_echo' in message['message']: continue
-                    
+                    print message
                     if message['message']['text']=='img': #Enviar lista de imagenes
                         elements = []
                         element = Element(title="test", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://arsenal.com")
