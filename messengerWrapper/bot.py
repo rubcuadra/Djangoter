@@ -33,6 +33,31 @@ class Button(dict):
     def to_json(self):
         return json.dumps({k:v for k, v in self.iteritems() if k in self.__acceptable_keys})
 
+class QuickReply(dict):
+    __acceptable_keys = ['content_type','image_url','title','payload']
+
+    def __init__(self, *args, **kwargs):
+        if six.PY2:
+            kwargs = {k:v for k, v in kwargs.iteritems() if k in self.__acceptable_keys}
+        else:
+            kwargs = {k:v for k, v in kwargs.items() if k in self.__acceptable_keys}
+        super(QuickReply, self).__init__(*args, **kwargs)
+
+    def to_json(self):
+        return json.dumps({k:v for k, v in self.iteritems() if k in self.__acceptable_keys})
+class QuickLocationReply(dict):
+    #__acceptable_keys = ['content_type']
+    def __init__(self, *args, **kwargs):
+        kwargs['content_type']=location
+        if six.PY2:
+            kwargs = {k:v for k, v in kwargs.iteritems() if k in self.__acceptable_keys}
+        else:
+            kwargs = {k:v for k, v in kwargs.items() if k in self.__acceptable_keys}
+        super(QuickLocationReply, self).__init__(*args, **kwargs)
+
+    def to_json(self):
+        return json.dumps({k:v for k, v in self.iteritems() if k in self.__acceptable_keys})
+
 
 class NotificationType(Enum):
     regular = "REGULAR"
@@ -181,6 +206,20 @@ class Bot:
                 }
             }
         }, notification_type)
+    def send_quick_replies(self,recipient_id,text,quick_replies, notification_type=NotificationType.regular):
+        """Send quick replie to the specified recipient.
+        https://developers.facebook.com/docs/messenger-platform/send-api-reference/quick-replies
+        Input:
+            recipient_id: recipient id to send to
+            text: text of message to send
+            buttons: buttons to send
+        Output:
+            Response from API as <dict>
+        """
+        return self.send_message(recipient_id, {
+            "text": text,
+            "quick_replies":quick_replies
+        }, notification_type)
 
     def send_action(self, recipient_id, action, notification_type=NotificationType.regular):
         """Send typing indicators or send read receipts to the specified recipient.
@@ -324,3 +363,4 @@ class Bot:
     def _send_payload(self, payload):
         """ Deprecated, use send_raw instead """
         return self.send_raw(payload)
+
