@@ -54,8 +54,8 @@ class BotView(generic.View):
                                           message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
                     # are sent as attachments and must be handled accordingly.     
-                else if 'delivery':
+                elif 'delivery':
                     pass
-                else if 'read' in message:
+                elif 'read' in message:
                     pass
         return HttpResponse()  
