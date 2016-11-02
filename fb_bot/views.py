@@ -48,12 +48,13 @@ class BotView(generic.View):
                 #if 'read' in message: #Lo acaba de leer
                 if 'postback' in message:
                     print message['postback']['payload']
+                    continue
 
-                if 'message' in message:
+                elif 'message' in message:
                     # Print the message to the terminal
-                    if 'is_echo' in message['message']: continue
-                    print message
-                    if message['message']['text']=='img': #Enviar lista de imagenes
+                    if 'is_echo' in message['message']: 
+                        continue
+                    elif message['message']['text']=='img': #Enviar lista de imagenes
                         elements = []
                         element = Element(title="test", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://arsenal.com")
                         elements.append(element)
@@ -74,9 +75,9 @@ class BotView(generic.View):
                         bot.send_text_message(message['sender']['id'],message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
                     # are sent as attachments and must be handled accordingly.     
-                if 'read' in message:
+                elif 'read' in message:
                     continue
-                elif 'delivery':
+                elif 'delivery' in message:
                     continue
                 
 
