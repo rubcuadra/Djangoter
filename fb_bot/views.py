@@ -57,6 +57,11 @@ class BotView(generic.View):
                     # Print the message to the terminal
                     if 'is_echo' in message['message']: 
                         continue
+                    elif 'attachments' in message['message']:
+                        print message['message']['attachments']
+                        if message['message']['attachments']['type']=='location':
+                            coor = message['message']['attachments']['payload']['coordinates']
+                            print coor['lat']
                     elif message['message']['text']=='img': #Enviar lista de imagenes
                         elements = []
                         element = Element(title="test", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://arsenal.com")
