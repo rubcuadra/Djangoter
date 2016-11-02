@@ -62,7 +62,7 @@ class BotView(generic.View):
                         
                         for attachment in message['message']['attachments']:
                             if attachment['type']=='location':
-                                coor = message['message']['attachments']['payload']['coordinates']
+                                coor = attachment['payload']['coordinates']
                                 print coor['lat']
                         continue
 
