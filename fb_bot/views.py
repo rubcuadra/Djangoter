@@ -48,10 +48,9 @@ class BotView(generic.View):
                 #if 'read' in message: #Lo acaba de leer
                 if 'message' in message:
                     # Print the message to the terminal
-                    if 'is_echo' in message['message']:
-                        continue
+                    if 'is_echo' in message['message']: continue
 
-                    if message['message']['text']=='img':
+                    if message['message']['text']=='img': #Enviar lista de imagenes
                         elements = []
                         element = Element(title="test", image_url="https://marco.org/media/2016/01/md101lla.png", subtitle="subtitle", item_url="http://arsenal.com")
                         elements.append(element)
@@ -59,6 +58,10 @@ class BotView(generic.View):
                         elements.append(element1)
                         bot.send_generic_message(message['sender']['id'], elements)
                     
+                    elif message['message']['text']=='vaporwave':
+                        image_url = "https://www.youtube.com/watch?v=TgqiSBxvdws"
+                        bot.send_image_url(message['sender']['id'], image_url) 
+
                     bot.send_text_message(message['sender']['id'], \
                                           message['message']['text'])
                     # Assuming the sender only sends text. Non-text messages like stickers, audio, pictures
