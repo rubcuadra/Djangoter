@@ -48,7 +48,7 @@ class QuickReply(dict):
 class QuickLocationReply(dict):
     #__acceptable_keys = ['content_type']
     def __init__(self, *args, **kwargs):
-        kwargs['content_type']=location
+        kwargs['content_type']='location'
         if six.PY2:
             kwargs = {k:v for k, v in kwargs.iteritems() if k in self.__acceptable_keys}
         else:
